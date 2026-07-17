@@ -25,4 +25,26 @@ From PortfolioProject..CovidDeaths
 Where location like '%states%'
 order by 1,2
 
+-- total_cases vs population
 
+SELECT location, date,population, total_cases,  (total_cases/population)*100 as PercentPopulationInfected
+From PortfolioProject..CovidDeaths
+Where location like '%italy%'
+order by 1,2
+
+SELECT location, date,population, total_cases,  (total_cases/population)*100 as PercentPopulationInfected
+From PortfolioProject..CovidDeaths
+Where location like '%states%'
+order by 1,2
+
+-- Showing Countries with Highest infection Rate compared to population
+SELECT location,population,MAX(total_cases) as HighestInfection,  MAX((total_cases/population))*100 as PercentPopulationInfected
+From PortfolioProject..CovidDeaths
+Group by location, population
+order by PercentPopulationInfected desc
+
+-- Showing Countries with Highest Death Count per Population
+SELECT location,MAX(cast(total_deaths as int)) as TotalDeathCount
+From PortfolioProject..CovidDeaths
+Group by location
+order by TotalDeathCount desc
